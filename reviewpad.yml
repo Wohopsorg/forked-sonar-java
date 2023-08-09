@@ -2,3 +2,11 @@ workflows:
   - name: My First Reviewpad Workflow
     run:
       - $addLabel("hello world")
+  - name: Raise Security Awarness
+    run:
+      - if: $hasFilePattern("**/authentication/**")
+        then:
+          - $addLabel("security")
+          - $assignReviewer(["Wohops"], 1, "random")
+          #- $assignTeamReviewer(["Security"]) # This 'Security' team must exist in your GitHub organization. If no such team is defined, simply omit this line.
+          - $commentOnce("The Security team has been involved because the authentication layer is touched")
