@@ -57,7 +57,6 @@ public class ArraysAsListOfPrimitiveToStreamCheck extends AbstractMethodDetectio
     }
   }
 
-  // this is a stupid comment
   private static boolean shouldUsePrimitiveStream(MethodInvocationTree mit) {
     Set<Type> argumentTypes = argumentTypes(mit.arguments());
     return argumentTypes.size() == 1 && isPrimitiveTypeHandledByStream(argumentTypes.iterator().next());
