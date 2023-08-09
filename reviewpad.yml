@@ -10,3 +10,9 @@ workflows:
           - $assignReviewer(["Wohops"], 1, "random")
           #- $assignTeamReviewer(["Security"]) # This 'Security' team must exist in your GitHub organization. If no such team is defined, simply omit this line.
           - $commentOnce("The Security team has been involved because the authentication layer is touched")
+  - name: Merge Protection if Critical-Annoted Code is Touched
+    run:
+      - if: $hasAnnotation("critical") && $reviewerStatus("Wohops") != "APPROVED"
+        then:
+          - $addLabel("critical")
+          - $failCheckStatus("An approval from 'Wohops' is required as a critical piece of code has been touched")
